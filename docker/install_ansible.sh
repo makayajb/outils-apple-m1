@@ -32,6 +32,7 @@ fi
 if [ $1 == "node" ]
 then
   
+  # https://www.ansiblepilot.com/articles/open-firewall-ports-in-debian-like-systems-ansible-module-ufw/
   apt-get install -y ufw curl
 
   ufw app list
