@@ -73,19 +73,6 @@ Vagrant.configure("2") do |config|
   #   apt-get install -y apache2
   # SHELL
 
-  #config.vm.define "ansible" do |ansible|
-  #  ansible.vm.box = "ilker/ubuntu2004"
-  #  ansible.vm.network "private_network", type: "static", ip: "192.168.56.10"
-  #  ansible.vm.hostname = "ansible"
-  #  ansible.vm.provider "virtualbox" do |v|
-  #    v.name = "ansible"
-  #    v.memory = 2048
-  #    v.cpus = 2
-  #  end
-  #  #ansible.vm.provision :shell do |shell|
-  #  #  shell.path = "install_ansible.sh"
-  #  #  shell.args = ["master", "192.168.99.10"]
-  #  #end
   #end
 
 
@@ -111,6 +98,9 @@ Vagrant.configure("2") do |config|
 
       # Configure Docker to allow access to more resources
       docker.privileged = true
+
+      # Add ansible file
+      # docker.volumes = ["#{Dir.pwd}/ansible:/home/vagrant/"]
     end
 
     ansible.vm.provision :shell do |shell|
@@ -142,7 +132,10 @@ Vagrant.configure("2") do |config|
         # Configure Docker to allow access to more resources
         docker.privileged = true
 
-        # docker.expose = [80]
+        docker.ports = ['8081:80']
+
+        # Overload HTTPD index file
+        #docker.volumes = ["#{Dir.pwd}/src:/var/www/html"]
 
         # docker.name = "client#{i}"
         # docker.memory = ram_client

@@ -29,13 +29,21 @@ then
 
 fi
 
-# if [ $1 == "node" ]
-# then
-#   apt-get install -y curl apache2
+if [ $1 == "node" ]
+then
+  
+  apt-get install -y ufw curl
 
-#   # ufw app list
-#   # ufw allow 'Apache'
-#   # ufw status
-#   systemctl status apache2
-# fi
+  ufw app list
+  
+  ufw status
+
+  # To do in docker container
+  # apt install -y apache2
+  # ufw allow 'Apache' 
+  # systemctl start apache2
+  # systemctl status apache2
+
+  # apt install -y apache2 && ufw allow 'Apache' && systemctl start apache2 && systemctl status apache2
+fi
 echo "For this Stack, you will use $(hostname -I) IP Address"

@@ -12,14 +12,14 @@ ENV container docker
 RUN apt-get update -y && apt-get dist-upgrade -y
 
 # Install system dependencies, you may not need all of these
-RUN apt-get install -y --no-install-recommends ssh sudo libffi-dev systemd openssh-client
+RUN apt-get install -y --no-install-recommends ssh sudo libffi-dev systemd openssh-client apt-utils
 
 
 # Needed to run systemd
 # VOLUME [ "/sys/fs/cgroup" ]
 # Doesn't appear to be necessary? See comments
 
-RUN apt-get -y install git
+#RUN apt-get -y install git
 
 # Add vagrant user and key for SSH
 RUN useradd --create-home -s /bin/bash vagrant
