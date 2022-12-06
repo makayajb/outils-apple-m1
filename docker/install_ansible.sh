@@ -9,7 +9,7 @@ if [ $1 == "master" ]
 then
 
   # install ansible
-  pip3 install ansible
+  pip3 install ansible ansible-lint
 
   sudo apt-get install -y git
 
