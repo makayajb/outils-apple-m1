@@ -9,7 +9,9 @@
 # Using docker with Vagrant
 # https://subscription.packtpub.com/book/virtualization-&-cloud/9781786464910/1/ch01lvl1sec17/using-docker-with-vagrant 
 
-ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker'
+
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker'  # --provider=docker
+ENV['VAGRANT_NO_PARALLEL'] = 'yes'   # --no-parallel
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
@@ -116,7 +118,7 @@ Vagrant.configure("2") do |config|
       shell.args = ["master", "192.168.56.10"]
     end
   end
-  clients=1
+  clients=3
   ram_client=2048
   cpu_client=1
   (1..clients).each do |i|
@@ -140,7 +142,7 @@ Vagrant.configure("2") do |config|
         # Configure Docker to allow access to more resources
         docker.privileged = true
 
-        docker.ports = ['8081:80']
+        docker.ports = ["808#{i}:80"]
 
         # Overload HTTPD index file
         #docker.volumes = ["#{Dir.pwd}/src:/var/www/html"]
@@ -154,6 +156,12 @@ Vagrant.configure("2") do |config|
         shell.path = "install_ansible.sh"
         shell.args = ["node", "192.168.56.10"]
       end
+
+      # client.vm.provision "ansible" do |ansible|
+      #   ansible.compatibility_mode = "2.0"
+      #   ansible.limit = "all"
+      #   ansible.playbook = "ansible/ufw.yml"
+      # end
     end
   end
 end

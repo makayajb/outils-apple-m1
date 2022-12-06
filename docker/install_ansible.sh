@@ -3,7 +3,7 @@
 # sudo apt update
 # sudo apt-get -y upgrade
 apt-get install -y python3-pip
-apt-get install -y build-essential libssl-dev libffi-dev python3-dev
+apt-get install -y build-essential libssl-dev libffi-dev python3-dev openssh-client sshpass vim 
 
 if [ $1 == "master" ]
 then
@@ -46,5 +46,7 @@ then
   # systemctl status apache2
 
   # apt install -y apache2 && ufw allow 'Apache' && systemctl start apache2 && systemctl status apache2
+  
 fi
-echo "For this Stack, you will use $(hostname -I) IP Address"
+
+echo "For this Stack, you will use $(hostname -I | awk '{print $1}') IP Address"
